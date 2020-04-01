@@ -15,15 +15,16 @@ class Card extends React.Component {
 
     return (
       <div className="paper">
-        <article>
-          { fluidImg == null || <Img imgStyle={{margin: "0"}} className="rounded-tr-lg rounded-tl-lg shadow-md" fluid={fluidImg} /> }
+        <article className="articleText">
 
           <header>
             <Link to={slug}>
-              <h3 style={{marginBottom: rhythm(1/4),}}>{title}</h3>
+              <h1 className="postTitle">{title}</h1>
             </Link>
-            <small>{date}</small>
+            <small className="date">{date}</small>
           </header>
+
+          { fluidImg == null || <Img className="cardImage" imgStyle={{margin: "0"}} fluid={fluidImg} /> }
 
           <section>
             <p>{text}</p>
