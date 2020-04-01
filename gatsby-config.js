@@ -3,12 +3,14 @@ module.exports = {
     title: `fernyfoods`,
     author: {
       name: `Fern Lukban`,
-      summary: `who currently lives on a pullout couch waiting for restaurants to open again.`,
+      summary: `I'm currently studying computer science and engineering at UCI. I'll be starting full-time at Facebook in the fall as a software engineer. Food has been a constant in my life, from watching food network to cooking meals for friends and family. I like to do all things related to food. This will have my recipes, reviews, and cooking videos.`,
     },
     description: `What came first, cooking or eating?`,
     siteUrl: `https://fernyfoods.com`,
     social: {
       twitter: `opsadboys`,
+      instagram: `fernanlukban`,
+      foodstagram: `fernyfoods`,
     },
   },
   plugins: [

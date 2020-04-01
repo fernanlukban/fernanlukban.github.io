@@ -28,7 +28,7 @@ const Bio = () => {
             summary
           }
           social {
-            twitter
+            foodstagram
           }
         }
       }
@@ -40,7 +40,7 @@ const Bio = () => {
     <div
       style={{
         display: `flex`,
-        marginBottom: rhythm(2.5),
+        marginBottom: `1em`,
       }}
     >
       <Image
@@ -57,10 +57,11 @@ const Bio = () => {
         }}
       />
       <p>
-        Written by <strong>{author.name}</strong> {author.summary}
+        Hi! I&apos;m <strong>{author.name}</strong>! {author.summary}
         {` `}
-        <a href={`https://twitter.com/${social.twitter}`}>
-          @{social.twitter}
+        Follow me on instagram!{` `}
+        <a href={`https://instagram.com/${social.foodstagram}`}>
+          @{social.foodstagram}
         </a>
       </p>
     </div>
