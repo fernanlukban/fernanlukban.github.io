@@ -1,15 +1,11 @@
 @tailwind utilities;
 
 .paper {
-    @apply .w-full .h-full .overflow-hidden .mb-6 .pb-6;
-}
-
-.articleText {
-    @apply .my-0;
+    @apply .w-full .h-full .overflow-hidden;
 }
 
 .postTitle {
-    @apply .my-3;
+    @apply .mb-0
 }
 
 .cardImage {

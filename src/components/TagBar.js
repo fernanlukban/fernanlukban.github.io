@@ -11,7 +11,7 @@ class TagBar extends React.Component {
       return (
         <>
           <Link to={tag}>
-            <h4 className="tag">#{tag}</h4>
+            <small className="tag">#{tag}</small>
           </Link>
         </>
       );
@@ -19,7 +19,7 @@ class TagBar extends React.Component {
 
     return (
       <div className="tagBar">
-        <h4 style={{display: "inline"}}>tags: </h4>
+        <small style={{display: "inline"}}>tags: </small>
         {tagComponents}
       </div>
     );
