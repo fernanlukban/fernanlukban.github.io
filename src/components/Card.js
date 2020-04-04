@@ -4,9 +4,11 @@ import { rhythm } from "../utils/typography"
 import Img from "gatsby-image"
 import "./Card.css"
 
+import TagBar from "./TagBar"
+
 class Card extends React.Component {
   render() {
-    const { title, date, description } = this.props.node.frontmatter;
+    const { title, date, description, tagList } = this.props.node.frontmatter;
     const frontmatter = this.props.node.frontmatter;
     const fluidImg = frontmatter.featuredImage != null ? frontmatter.featuredImage.childImageSharp.fluid : null;
     const { excerpt } = this.props.node;
@@ -21,6 +23,7 @@ class Card extends React.Component {
             <Link to={slug}>
               <h1 className="postTitle">{title}</h1>
             </Link>
+            <TagBar tagList={tagList} />
             <small className="date">{date}</small>
           </header>
 
