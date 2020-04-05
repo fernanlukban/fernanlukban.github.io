@@ -6,10 +6,13 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 
+import TagBar from "../components/TagBar"
+
 const BlogPostTemplate = ({ data, pageContext, location }) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata.title
   const { previous, next } = pageContext
+  const tagList = data.markdownRemark.frontmatter.tagList;
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -27,6 +30,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
           >
             {post.frontmatter.title}
           </h1>
+          <TagBar tagList={tagList} />
           <p
             style={{
               ...scale(-1 / 5),
@@ -95,6 +99,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
+        tagList
       }
     }
   }

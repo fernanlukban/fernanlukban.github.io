@@ -12,15 +12,17 @@ class Card extends React.Component {
     const frontmatter = this.props.node.frontmatter;
     const fluidImg = frontmatter.featuredImage != null ? frontmatter.featuredImage.childImageSharp.fluid : null;
     const { excerpt } = this.props.node;
+    const { tag } = this.props;
     const { slug } = this.props.node.fields;
     const text = description || excerpt;
+    const link = tag ? `/${tag}${slug}` : slug;
 
     return (
       <div className="paper">
         <article className="articleText">
 
           <header>
-            <Link to={slug}>
+            <Link to={link}>
               <h1 className="postTitle">{title}</h1>
             </Link>
             <TagBar tagList={tagList} />

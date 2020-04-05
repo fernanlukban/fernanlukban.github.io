@@ -18,9 +18,13 @@ exports.createPages = async ({ graphql, actions }) => {
               fields {
                 slug
               }
+              id
+              excerpt(pruneLength: 160)
+              html
               frontmatter {
                 title
                 tagList
+                description
               }
             }
           }
@@ -63,7 +67,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   for (var tag in tags) {
     createPage({
-      path: `${tag}`,
+      path: `/${tag}/`,
       component: tagPage,
       context: {
         tag: tag,
@@ -71,15 +75,16 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     });
 
+    console.log(tag);
     tags[tag].forEach((post, index) => {
-      const previous = index <= 0 ? null : posts[index - 1].node
-      const next = index === posts.length - 1 ? null : posts[index + 1].node
+      const previous = index <= 0 ? null : tags[tag][index - 1].node
+      const next = index === tags[tag].length - 1 ? null : tags[tag][index + 1].node
 
       createPage({
         path: `/${tag}${post.node.fields.slug}`,
         component: blogPost,
         context: {
-          slug: `/${tag}${post.node.fields.slug}`,
+          slug: post.node.fields.slug,
           previous,
           next,
         },

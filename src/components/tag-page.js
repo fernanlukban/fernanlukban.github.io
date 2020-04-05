@@ -7,11 +7,10 @@ import SEO from "./seo"
 class TagPage extends React.Component {
   render() {
     const { pageContext } = this.props;
-    console.log(this.props)
     const { tag, tagPosts } = pageContext;
 
     return (
-      <Layout location={tag} title={tag}>
+      <Layout location={tag} title={`#${tag}`}>
         <SEO title={`All ${tag} posts`} />
           <hr/>
           {tagPosts.map(({ node }) => {
@@ -19,7 +18,7 @@ class TagPage extends React.Component {
               console.log(node)
               return (
                 <>
-                  <Card key={node.fields.slug} node={node} />
+                  <Card key={node.fields.slug} node={node} tag={tag}/>
                   <hr/>
                 </>
               )
