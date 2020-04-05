@@ -5,6 +5,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
   const blogPost = path.resolve(`./src/templates/blog-post.js`)
+  const tagPage = path.resolve(`./src/components/tag-page.js`)
   const result = await graphql(
     `
       {
@@ -19,6 +20,7 @@ exports.createPages = async ({ graphql, actions }) => {
               }
               frontmatter {
                 title
+                tagList
               }
             }
           }
@@ -34,9 +36,19 @@ exports.createPages = async ({ graphql, actions }) => {
   // Create blog posts pages.
   const posts = result.data.allMarkdownRemark.edges
 
+  let tags = {};
+
   posts.forEach((post, index) => {
     const previous = index === posts.length - 1 ? null : posts[index + 1].node
     const next = index === 0 ? null : posts[index - 1].node
+
+    post.node.frontmatter.tagList.split(" ").forEach((tag) => {
+      if (tag.toLowerCase() in tags) {
+        tags[tag.toLowerCase()].push(post);
+      } else {
+        tags[tag.toLowerCase()] = [post];
+      }
+    });
 
     createPage({
       path: post.node.fields.slug,
@@ -48,6 +60,32 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
+
+  for (var tag in tags) {
+    createPage({
+      path: `${tag}`,
+      component: tagPage,
+      context: {
+        tag: tag,
+        tagPosts: tags[tag],
+      }
+    });
+
+    tags[tag].forEach((post, index) => {
+      const previous = index <= 0 ? null : posts[index - 1].node
+      const next = index === posts.length - 1 ? null : posts[index + 1].node
+
+      createPage({
+        path: `/${tag}${post.node.fields.slug}`,
+        component: blogPost,
+        context: {
+          slug: `/${tag}${post.node.fields.slug}`,
+          previous,
+          next,
+        },
+      })
+    })
+  }
 }
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
